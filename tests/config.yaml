@@ -6,7 +6,4 @@ browsers:
     type: local
     browser: Chrome
 environments:
-  CZ:
-    google_url: https://google.cz
-  DE:
-    google_url: https://google.de
+    url: https://www.saucedemo.com/

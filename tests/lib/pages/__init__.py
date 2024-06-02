@@ -1,4 +1,9 @@
-from .search_page import SearchPage
-from .result_page import ResultPage
+from .cart_page import CartPage
+from .login_page import LoginPage
+from .products_page import ProductsPage
 
-__all__ = ['SearchPage', 'ResultPage']
+page_map = {
+    'Products': 'products_page',
+}
+
+__all__ = ['LoginPage', 'ProductsPage', 'CartPage']
