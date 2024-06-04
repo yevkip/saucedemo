@@ -6,10 +6,9 @@ Feature: Products
 
 
 #   Scenario Outline: Cart counter decrease from Cart page. <final_qty> products left.
-#    Given I load the website
-#    Given User is logged in
+#    Given Logged in User is on Products page
 #    Given Cart contains <initial_qty> product(s)
-#    Given User is on Cart page
+#    When User is on Cart page
 #    When User removes <qty_to_remove> product(s)
 #    Then Cart badge shows <final_qty> product(s) in cart
 #    Examples:
@@ -18,10 +17,8 @@ Feature: Products
 #
 #
 #  Scenario Outline: Cart counter decrease from Products page. <final_qty> products left.
-#    Given I load the website
-#    Given User is logged in
+#    Given Logged in User is on Products page
 #    Given Cart contains <initial_qty> product(s)
-#    Given User is on Products page
 #    When User removes <qty_to_remove> product(s)
 #    Then Cart badge shows <final_qty> product(s) in cart
 #    Examples:
@@ -30,17 +27,14 @@ Feature: Products
 #
 #
 #  Scenario: Verify btn state on Cart page is "Remove"
-#    Given I load the website
-#    Given User is logged in
+#    Given Logged in User is on Products page
 #    Given Cart contains added product
 #    When User is on Cart page
 #    Then Products in cart are displayed with "Remove" btn
 #
 #
 #  Scenario Outline: Verify btn state change from <initial_state> to <final_state>
-#    Given I load the website
-#    Given User is logged in
-#    Given User is on Products page
+#    Given Logged in User is on Products page
 #    Given <initial_state> btn is displayed for product
 #    When User clicks on <initial_state> btn
 #    Then Btn changes state to <final_state>
@@ -50,9 +44,7 @@ Feature: Products
 #      | "Remove"      | "Add to cart" |
 #
 #  Scenario Outline: Verify product autonomy when <initial_state> btn is clicked
-#    Given I load the website
-#    Given User is logged in
-#    Given User is on Products page
+#    Given Logged in User is on Products page
 #    When User clicks on <initial_state> btn
 #    Then All products except affected one are displayed with <initial_state> btn
 #    Examples:
@@ -61,10 +53,8 @@ Feature: Products
 #      | "Remove"      |
 #
 #  Scenario Outline: Cart counter increase. Total <final_qty> product(s)
-#    Given I load the website
-#    Given User is logged in
+#    Given Logged in User is on Products page
 #    Given Cart contains <initial_qty> product(s)
-#    Given User is on Products page
 #    When User adds <qty_to_add> product to cart
 #    Then Cart badge shows <final_qty> product(s) in cart
 #    Examples:
@@ -75,9 +65,7 @@ Feature: Products
 """
 
   Scenario Outline: Add <final_qty> product(s) to cart
-    Given I load the website
-    Given User is logged in
-    Given User is on Products page
+    Given Logged in User is on Products page
     When User adds <final_qty> product to cart
     When User navigates to cart
     Then Cart contains <final_qty> product(s)
@@ -86,11 +74,10 @@ Feature: Products
       | 1         |
       | 6         |
 
+
   Scenario Outline: Remove <qty_to_remove> product(s) from cart from Products page
-    Given I load the website
-    Given User is logged in
+    Given Logged in User is on Products page
     Given Cart contains <initial_qty> product(s)
-    Given User is on Products page
     When User clicks on Remove btn for <qty_to_remove> added product(s)
     When User navigates to cart
     Then Cart contains <final_qty> product(s)
@@ -100,8 +87,7 @@ Feature: Products
       | 6           | 2             | 4         |
 
   Scenario Outline: Remove <qty_to_remove> products from cart from Cart page
-    Given I load the website
-    Given User is logged in
+    Given Logged in User is on Products page
     Given Cart contains <initial_qty> product(s)
     Given User is on Cart page
     When In cart User clicks on Remove btn for <qty_to_remove> added product(s)
@@ -110,8 +96,3 @@ Feature: Products
       | initial_qty | qty_to_remove | final_qty |
       | 1           | 1             | 0         |
       | 6           | 2             | 4         |
-
-
-
-
-

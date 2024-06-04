@@ -6,9 +6,33 @@ def step_impl(context):
     context.app.login(username='standard_user', password='secret_sauce')
 
 
-@given(u'User is on Products page')
+@given(u'Logged in User is on Products page')
 def step_impl(context):
+    context.app.open_base_page()
+    context.app.login(username='standard_user', password='secret_sauce')
     context.app.products_page.is_active()
+
+
+@given(u'Logged in User is on Cart page. Cart Empty')
+def step_impl(context):
+    context.app.open_base_page()
+    context.app.login(username='standard_user', password='secret_sauce')
+    context.app.products_page.is_active()
+    context.app.products_page.navigate_to_cart()
+    context.app.cart_page.is_active()
+
+
+@given(u'User proceed to Checkout page with {qty} product(s) in cart')
+def step_impl(context, qty):
+    context.app.products_page.add_product(num=qty)
+    context.app.products_page.update_cart()
+    context.app.products_page.navigate_to_cart()
+    context.app.cart_page.proceed_to_checkout()
+
+
+# @given(u'User is on Products page')
+# def step_impl(context):
+#     context.app.products_page.is_active()
 
 
 @given(u'User is on Cart page')
@@ -16,9 +40,6 @@ def step_impl(context):
     context.app.products_page.navigate_to_cart()
     context.app.cart_page.is_active()
 
-@when(u'User is on Cart page')
-def step_impl(context):
-    pass
 
 @given(u'Cart contains added product')
 def step_impl(context):

@@ -46,3 +46,15 @@ class CartInventoryItem:
     def action_btn(self):
         return self.element.find_element(By.CLASS_NAME, 'cart_button')
 
+
+class CheckoutOverviewInventoryItem:
+    def __init__(self, element):
+        self.element = element
+
+    @property
+    def name(self):
+        return self.element.find_element(By.CLASS_NAME, 'inventory_item_name').text
+
+    @property
+    def price(self):
+        return self.element.find_element(By.CLASS_NAME, 'inventory_item_price').text
