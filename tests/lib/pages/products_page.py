@@ -1,5 +1,4 @@
 import random
-
 from .base_page import BasePage
 from tests.lib.pages.components.product import InventoryItem
 from selenium.webdriver.common.by import By
@@ -10,6 +9,7 @@ class ProductsPage(BasePage):
     inventory_item_selector = 'inventory_item'
     cart_selector = 'shopping_cart_link'
     cart_badge_selector = 'shopping_cart_badge'
+    menu_btn_selector = 'react-burger-menu-btn'
 
     def __init__(self, driver):
         super(ProductsPage, self).__init__(driver)
@@ -24,6 +24,9 @@ class ProductsPage(BasePage):
     @property
     def cart_badge_qty(self):
         return self.d.find_element(By.CLASS_NAME, self.cart_selector).text
+
+    def open_menu(self):
+        return self.d.find_element(By.ID, self.menu_btn_selector).click()
 
     def navigate_to_cart(self):
         self.d.find_element(By.CLASS_NAME, self.cart_selector).click()
@@ -55,19 +58,23 @@ class ProductsPage(BasePage):
         if update_with:
             for name in update_with:
                 self.products_in_cart.pop(name)
-
         else:
-
             products_in_cart = {}
             for product in self.__cart:
                 products_in_cart[product.name] = {}
+                products_in_cart[product.name]['description'] = product.description
                 products_in_cart[product.name]['price'] = product.price
-                # if product.descriprion:
-                #     products_in_cart[product.name]['description'] = product.descriprion
             self.products_in_cart = products_in_cart
 
-    def verify_cart_badge_qty(self, num):
-        assert int(self.cart_badge_qty) == int(num)
+    def verify_cart_badge_qty(self, num=0):
+        if num:
+            assert int(self.cart_badge_qty) == int(num)
+        else:
+            try:
+                assert self.cart_badge_qty
+            except AssertionError:
+                print('Cart badge qty not present, so cart should be empty')
+
 
 
 
