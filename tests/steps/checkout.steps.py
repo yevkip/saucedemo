@@ -11,6 +11,11 @@ def step_impl(context):
     context.app.checkout_page.complete_checkout_info_and_submit()
 
 
+@when(u'User complete checkout info {first_name}, {last_name}, {zip}')
+def step_impl(context, first_name, last_name, zip):
+    context.app.checkout_page.complete_checkout_info_and_submit(first_name, last_name, zip)
+
+
 @when(u'User proceeds to checkout')
 def step_impl(context):
     context.app.cart_page.proceed_to_checkout()
@@ -41,3 +46,8 @@ def step_impl(context):
 @then(u'Checkout complete message is displayed')
 def step_impl(context):
     context.app.checkout_complete_page.verify_checkout_complete()
+
+
+@then(u'Error is displayed')
+def step_impl(context):
+    context.app.checkout_page.verify_checkout_info_missed_error()

@@ -8,6 +8,7 @@ from .products_page import ProductsPage
 page_map = {
     'Products': 'products_page',
     'Cart': 'cart_page',
+    'Checkout': 'checkout_page',
     'Checkout Overview': 'checkout_overview_page',
     'Checkout: Complete!': 'checkout_complete_page'
 
