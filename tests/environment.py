@@ -11,7 +11,6 @@ def load_config():
 
 def before_all(context):
     context.config = load_config()
-    context.app = get_app(context.config)
 
 
 def before_scenario(context, scenario):
