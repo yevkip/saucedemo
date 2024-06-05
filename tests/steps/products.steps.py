@@ -79,7 +79,7 @@ def step_impl(context, qty):
 @when(u'In cart User clicks on Remove btn for {qty} added product(s)')
 def step_impl(context, qty):
     removed_products = context.app.cart_page.remove_product(qty)
-    context.app.products_page.update_cart(update_with=removed_products)
+    context.app.products_page.update_cart(force_update=removed_products)
 
 
 @then(u'Products in cart are displayed with "Remove" btn')

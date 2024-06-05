@@ -50,9 +50,11 @@ class ProductsPage(BasePage):
                 raise Exception(f'{inventory_item.name} is not in cart. Not expected.')
             self.__cart.remove(inventory_item)
 
-    def update_cart(self, update_with=None):
-        if update_with:
-            for name in update_with:
+    def update_cart(self, force_update=None):
+        # if products were removed from cart from Cart page we use force_update to manage expected products in cart,
+        # otherwise if any actions are taken from Products page expected products in cart are managed naturally
+        if force_update:
+            for name in force_update:
                 self.products_in_cart.pop(name)
         else:
             products_in_cart = {}
@@ -65,8 +67,10 @@ class ProductsPage(BasePage):
     def verify_cart_badge_qty(self, num=0):
         if num:
             assert int(self.cart_badge_qty) == int(num)
+            return int(self.cart_badge_qty)
         else:
             try:
                 assert self.cart_badge_qty
             except AssertionError:
                 print('Cart badge qty not present, so cart should be empty')
+                return 0
