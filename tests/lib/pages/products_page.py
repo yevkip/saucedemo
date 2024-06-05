@@ -9,7 +9,6 @@ class ProductsPage(BasePage):
     inventory_item_selector = 'inventory_item'
     cart_selector = 'shopping_cart_link'
     cart_badge_selector = 'shopping_cart_badge'
-    menu_btn_selector = 'react-burger-menu-btn'
 
     def __init__(self, driver):
         super(ProductsPage, self).__init__(driver)
@@ -24,9 +23,6 @@ class ProductsPage(BasePage):
     @property
     def cart_badge_qty(self):
         return self.d.find_element(By.CLASS_NAME, self.cart_selector).text
-
-    def open_menu(self):
-        return self.d.find_element(By.ID, self.menu_btn_selector).click()
 
     def navigate_to_cart(self):
         self.d.find_element(By.CLASS_NAME, self.cart_selector).click()
@@ -74,9 +70,3 @@ class ProductsPage(BasePage):
                 assert self.cart_badge_qty
             except AssertionError:
                 print('Cart badge qty not present, so cart should be empty')
-
-
-
-
-
-

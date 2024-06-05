@@ -12,3 +12,14 @@ def step_impl(context, page_name):
     page = getattr(context.app, _page_name)
     page.wait()
     page.is_active()
+
+
+@when(u'{user} logged out')
+def step_impl(context, user):
+    context.app.base_page.open_menu()
+    context.app.menu.logout()
+
+
+
+
+

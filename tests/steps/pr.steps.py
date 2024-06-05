@@ -1,22 +1,27 @@
 from behave import *
 
 
-@given(u'User is logged in')
-def step_impl(context):
-    context.app.login(username='standard_user', password='secret_sauce')
+@given(u'{user} is logged in')
+def step_impl(context, user):
+    context.app.login(username='standard_user')
 
 
-@given(u'Logged in User is on Products page')
-def step_impl(context):
+@when(u'{user} is logged in')
+def step_impl(context, user):
+    context.app.login(user)
+
+
+@given(u'Logged in {user} is on Products page')
+def step_impl(context, user):
     context.app.open_base_page()
-    context.app.login(username='standard_user', password='secret_sauce')
+    context.app.login(user)
     context.app.products_page.is_active()
 
 
 @given(u'Logged in User is on Cart page. Cart Empty')
 def step_impl(context):
     context.app.open_base_page()
-    context.app.login(username='standard_user', password='secret_sauce')
+    context.app.login(username='standard_user')
     context.app.products_page.is_active()
     context.app.products_page.navigate_to_cart()
     context.app.cart_page.is_active()
@@ -41,11 +46,6 @@ def step_impl(context):
     context.app.cart_page.is_active()
 
 
-@given(u'Cart contains added product')
-def step_impl(context):
-    pass
-
-
 @given(u'Cart contains {qty} product(s)')
 def step_impl(context, qty):
     context.app.products_page.add_product(num=qty)
@@ -63,8 +63,8 @@ def step_impl(context, qty):
     context.app.products_page.update_cart()
 
 
-@when(u'User navigates to cart')
-def step_impl(context):
+@when(u'{user} navigates to cart')
+def step_impl(context, user):
     context.app.products_page.navigate_to_cart()
 
 
@@ -85,9 +85,9 @@ def step_impl(context, qty):
     context.app.products_page.update_cart(update_with=removed_products)
 
 
-@when(u'User removes {qty} product(s)')
-def step_impl(context, qty):
-    pass
+# @when(u'User removes {qty} product(s)')
+# def step_impl(context, qty):
+#     pass
 
 
 @then(u'Products in cart are displayed with "Remove" btn')
@@ -113,4 +113,11 @@ def step_impl(context, state):
 @then(u'Cart contains {qty} product(s)')
 def step_impl(context, qty):
     expected_items = context.app.products_page.products_in_cart
+    assert int(qty) == len(expected_items), f"Expected qty: {qty}, Expected_items {len(expected_items)}"
+    context.app.cart_page.verify_cart_items(expected_items=expected_items)
+
+
+@then(u'Cart is empty')
+def step_impl(context):
+    expected_items = {}
     context.app.cart_page.verify_cart_items(expected_items=expected_items)

@@ -1,7 +1,7 @@
 import random
 
 from .base_page import BasePage
-from tests.lib.pages.components.product import InventoryItem, CartInventoryItem
+from tests.lib.pages.components.product import CartInventoryItem
 from selenium.webdriver.common.by import By
 
 
@@ -24,7 +24,7 @@ class CartPage(BasePage):
 
     def verify_cart_items(self, expected_items):
         cart_inventory_items = self.cart_inventory_items
-        assert len(cart_inventory_items) == len(expected_items)
+        assert len(cart_inventory_items) == len(expected_items), f'Actual items in cart {len(cart_inventory_items)}, Expected {len(expected_items)}'
         if expected_items:
             for item in cart_inventory_items:
                 assert item.name in expected_items
