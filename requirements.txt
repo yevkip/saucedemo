@@ -1,0 +1,6 @@
+# Core dependencies
+selenium
+behave
+
+# Dependencies for Allure reporting
+allure-behave

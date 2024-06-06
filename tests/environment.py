@@ -17,5 +17,9 @@ def before_scenario(context, scenario):
     context.app = get_app(context.config)
 
 
+def after_scenario(context, scenario):
+    context.app.shutdown()
+
+
 def after_all(context):
     context.app.shutdown()

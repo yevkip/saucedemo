@@ -14,9 +14,13 @@ def get_driver(config):
     }
 
     remote_browsers = {
-        'Firefox': webdriver.ChromeOptions(),
-        'Chrome': webdriver.FirefoxOptions()
+        'Firefox': webdriver.FirefoxOptions(),
+        'Chrome': webdriver.ChromeOptions()
     }
+
+    # Enable headless mode for remote browsers
+    for browser, options in remote_browsers.items():
+        options.add_argument('--headless')
 
     # browser_name = os.environ.get('BROWSER', 'CHROME-LOCAL')
     browser_name = os.environ.get('BROWSER', 'CHROME-REMOTE')

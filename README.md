@@ -1,16 +1,23 @@
-# Python/Selenium boilerplate
-Boiler plate for E2E tests, enforcing PEP8 coding style.
+# Automation framework for Swag Labs
+Python, Behave, Selenium WebDriver, Selenium Grid, Allure 
 
 # Prerequisites
-Unix-like system with python 3.6.4 and pipenv installed
+Unix-like system with python 3 and pipenv installed  
+Selenium Grid 'https://www.selenium.dev/documentation/grid/getting_started/'
 
-# Install dependencies
-`pipenv install`
 
-# Run tests
-`make behave`
+# Install requirements
+`pip install -r requirements.txt`
 
-# Configure tests
-`BROWSER=FIREFOX-LOCAL TEST_ENV=DE make behave`
+# Run all tests
+`behave saucedemo_bdd/tests/features/*.feature`
 
-Default is local Chrome browser and CZ environment, configuration is located at `tests/config.yaml`.
+# Get allure report
+Ideally need to be configured on CI/CD  
+`allure serve`
+
+# Configure test browser
+`BROWSER=FIREFOX-LOCAL make behave`  
+
+# Configuration file    
+`saucedemo_bdd/tests/config.yaml`.
