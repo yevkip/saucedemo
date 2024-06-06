@@ -20,3 +20,14 @@ class BasePage:
 
     def open_menu(self):
         return self.d.find_element(By.ID, self.menu_btn_selector).click()
+
+    def store_product_values(self, products):
+
+        if type(products) == dict:
+            return products
+        else:
+            pr_dict = {}
+            for product in products:
+                pr_dict[product.name] = {"description": product.description,
+                                         "price": product.price}
+            return pr_dict

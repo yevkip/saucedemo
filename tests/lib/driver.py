@@ -22,8 +22,9 @@ def get_driver(config):
     for browser, options in remote_browsers.items():
         options.add_argument('--headless')
 
-    # browser_name = os.environ.get('BROWSER', 'CHROME-LOCAL')
-    browser_name = os.environ.get('BROWSER', 'CHROME-REMOTE')
+    browser_name = os.environ.get('BROWSER', 'CHROME-LOCAL')
+    # browser_name = os.environ.get('BROWSER', 'FIREFOX-LOCAL')
+    # browser_name = os.environ.get('BROWSER', 'CHROME-REMOTE')
     browser_config = config['browsers'].get(browser_name)
 
     if not browser_config:

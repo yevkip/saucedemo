@@ -27,7 +27,7 @@ class ProductsPage(BasePage):
     def navigate_to_cart(self):
         self.d.find_element(By.CLASS_NAME, self.cart_selector).click()
 
-    def add_product(self, num=1, exclude_products=False):
+    def add_product(self, num=1):
         inventory_items = self.inventory_items
         idxs = random.sample(range(0, len(inventory_items)), int(num))
 
@@ -38,6 +38,7 @@ class ProductsPage(BasePage):
             else:
                 raise Exception(f'{inventory_item.name} is already in cart. Not expected.')
             self.__cart.append(inventory_item)
+        return self.__cart
 
     def remove_product(self, num=1):
         idxs = random.sample(range(0, len(self.__cart)), int(num))
@@ -49,20 +50,21 @@ class ProductsPage(BasePage):
             else:
                 raise Exception(f'{inventory_item.name} is not in cart. Not expected.')
             self.__cart.remove(inventory_item)
+        return self.__cart
 
-    def update_cart(self, force_update=None):
-        # if products were removed from cart from Cart page we use force_update to manage expected products in cart,
-        # otherwise if any actions are taken from Products page expected products in cart are managed naturally
-        if force_update:
-            for name in force_update:
-                self.products_in_cart.pop(name)
-        else:
-            products_in_cart = {}
-            for product in self.__cart:
-                products_in_cart[product.name] = {}
-                products_in_cart[product.name]['description'] = product.description
-                products_in_cart[product.name]['price'] = product.price
-            self.products_in_cart = products_in_cart
+    # def update_cart(self, force_update=None):
+    #     # if products were removed from cart from Cart page we use force_update to manage expected products in cart,
+    #     # otherwise if any actions are taken from Products page expected products in cart are managed naturally
+    #     if force_update:
+    #         for name in force_update:
+    #             self.products_in_cart.pop(name)
+    #     else:
+    #         products_in_cart = {}
+    #         for product in self.__cart:
+    #             products_in_cart[product.name] = {}
+    #             products_in_cart[product.name]['description'] = product.description
+    #             products_in_cart[product.name]['price'] = product.price
+    #         self.products_in_cart = products_in_cart
 
     def verify_cart_badge_qty(self, num=0):
         if num:
@@ -74,3 +76,6 @@ class ProductsPage(BasePage):
             except AssertionError:
                 print('Cart badge qty not present, so cart should be empty')
                 return 0
+
+    def verify_btn_state(self, expected_state, product):
+        assert product.action_btn.text == expected_state

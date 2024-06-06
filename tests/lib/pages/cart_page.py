@@ -24,7 +24,8 @@ class CartPage(BasePage):
 
     def verify_cart_items(self, expected_items):
         cart_inventory_items = self.cart_inventory_items
-        assert len(cart_inventory_items) == len(expected_items), f'Actual items in cart {len(cart_inventory_items)}, Expected {len(expected_items)}'
+        assert len(cart_inventory_items) == len(
+            expected_items), f'Actual items in cart {len(cart_inventory_items)}, Expected {len(expected_items)}'
         if expected_items:
             for item in cart_inventory_items:
                 assert item.name in expected_items
@@ -44,9 +45,7 @@ class CartPage(BasePage):
             else:
                 raise Exception(f'{inventory_item.name} is not in cart. Not expected.')
 
-        return removed_products
+        return self.cart_inventory_items
 
     def verify_empty_cart_error(self):
         pass
-
-

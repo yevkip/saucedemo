@@ -2,7 +2,10 @@
 Python, Behave, Selenium WebDriver, Selenium Grid, Allure 
 
 # Prerequisites
-Unix-like system with python 3 and pipenv installed  
+unix-like system  
+python 3 
+chromedriver (for Chrome)
+geckodriver (for FireFox)
 Selenium Grid 'https://www.selenium.dev/documentation/grid/getting_started/'
 
 

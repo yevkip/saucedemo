@@ -26,6 +26,11 @@ def step_impl(context):
     context.app.checkout_overview_page.finish_checkout()
 
 
+@when(u'User clicks on "Continue" btn')
+def step_impl(context):
+    context.app.checkout_page.continue_btn.click()
+
+
 @then(u'"Cart is empty" error is displayed')
 def step_impl(context):
     context.app.cart_page.verify_empty_cart_error()
@@ -33,8 +38,7 @@ def step_impl(context):
 
 @then(u'Checkout Overview page contains {qty} product(s) with expected prices')
 def step_impl(context, qty):
-    expected_items = context.app.products_page.products_in_cart
-    context.app.checkout_overview_page.verify_checkout_overview_inventory_items(expected_items)
+    context.app.checkout_overview_page.verify_checkout_overview_inventory_items(context.products_in_cart)
 
 
 @then(u'Price Total has expected calculation')
