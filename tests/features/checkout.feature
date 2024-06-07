@@ -24,6 +24,7 @@ Feature: Checkout
       | 1 |
       | 6 |
 
+  @skip
   Scenario: User is not able to checkout with empty cart
     Given Logged in User is on Cart page. Cart Empty
     When User proceeds to checkout

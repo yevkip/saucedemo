@@ -67,7 +67,7 @@ class ProductsPage(BasePage):
     #         self.products_in_cart = products_in_cart
 
     def verify_cart_badge_qty(self, num=0):
-        if num:
+        if int(num):
             assert int(self.cart_badge_qty) == int(num)
             return int(self.cart_badge_qty)
         else:

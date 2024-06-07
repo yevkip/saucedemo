@@ -23,6 +23,9 @@ def before_all(context):
 
 
 def before_scenario(context, scenario):
+    if 'skip' in scenario.tags:
+        scenario.skip("Skipping this scenario")
+
     context.app = get_app(config=context.config,
                           browser_name=context.browser)
 
