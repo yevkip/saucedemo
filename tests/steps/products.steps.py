@@ -75,6 +75,11 @@ def step_impl(context, user):
     context.app.products_page.navigate_to_cart()
 
 
+@when(u'User picks a product on Cart page')
+def step_impl(context):
+    context.product = random.choice(context.app.cart_page.cart_inventory_items)
+
+
 @given(u'User clicks on {state} btn on Products page')
 def step_impl(context, state):
     context.product.action_btn.click()
@@ -102,11 +107,6 @@ def step_impl(context, state):
     context.app.products_page.verify_btn_state(expected_state=state, product=context.product)
 
 
-@then(u'Products in cart are displayed with "Remove" btn')
-def step_impl(context):
-    pass
-
-
 @then(u'Cart badge shows {qty} product(s) in cart')
 def step_impl(context, qty):
     context.app.products_page.verify_cart_badge_qty(num=qty)
@@ -114,7 +114,10 @@ def step_impl(context, qty):
 
 @then(u'All products except affected one are displayed with "{state}" btn')
 def step_impl(context, state):
-    pass
+    products = context.app.products_page.inventory_items
+    for product in products:
+        if product.name != context.product.name:
+            assert product.action_btn.text == state
 
 
 @then(u'Cart contains {qty} product(s)')
