@@ -55,6 +55,7 @@ def step_impl(context, qty):
 
 
 @given(u'Btn state is {state}')
+@then(u'Btn state is {state}')
 def step_impl(context, state):
     context.app.products_page.verify_btn_state(expected_state=state, product=context.product)
 
@@ -81,10 +82,6 @@ def step_impl(context):
 
 
 @given(u'User clicks on {state} btn on Products page')
-def step_impl(context, state):
-    context.product.action_btn.click()
-
-
 @when(u'User clicks on {state} btn on Products page')
 def step_impl(context, state):
     context.product.action_btn.click()
@@ -100,11 +97,6 @@ def step_impl(context, qty):
 def step_impl(context, qty):
     context.products_in_cart = context.app.cart_page.remove_product(qty)
     context.products_in_cart = context.app.base_page.store_product_values(context.products_in_cart)
-
-
-@then(u'Btn state is {state}')
-def step_impl(context, state):
-    context.app.products_page.verify_btn_state(expected_state=state, product=context.product)
 
 
 @then(u'Cart badge shows {qty} product(s) in cart')
