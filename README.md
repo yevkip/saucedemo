@@ -35,3 +35,4 @@ Ideally need to be configured on CI/CD
 
 # Configuration file    
 `saucedemo_bdd/tests/config.yaml`.
+
