@@ -7,7 +7,7 @@ from selenium import webdriver
 logging.basicConfig(level=logging.INFO)
 
 
-def get_driver(config):
+def get_driver(config, browser_name):
     local_browsers = {
         'Firefox': webdriver.Firefox,
         'Chrome': webdriver.Chrome
@@ -22,9 +22,6 @@ def get_driver(config):
     for browser, options in remote_browsers.items():
         options.add_argument('--headless')
 
-    browser_name = os.environ.get('BROWSER', 'CHROME-LOCAL')
-    # browser_name = os.environ.get('BROWSER', 'FIREFOX-LOCAL')
-    # browser_name = os.environ.get('BROWSER', 'CHROME-REMOTE')
     browser_config = config['browsers'].get(browser_name)
 
     if not browser_config:
