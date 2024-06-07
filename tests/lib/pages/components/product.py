@@ -1,6 +1,13 @@
 from selenium.webdriver.common.by import By
 
 
+class ContextInventoryItem:
+    def __init__(self, inventory_item):
+        self.name = inventory_item.name
+        self.price = inventory_item.price
+        self.description = inventory_item.description
+
+
 class InventoryItem:
     def __init__(self, element):
         self.element = element

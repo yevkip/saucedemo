@@ -10,13 +10,27 @@ def load_config():
 
 
 def before_all(context):
+    browser = context.config.userdata.get('browser')
     context.config = load_config()
-    context.app = get_app(context.config)
+
+    if browser:
+        available_browsers = context.config['browsers'].keys()
+        if browser not in available_browsers:
+            raise ValueError(f'{browser} is not recognised. Available browsers {available_browsers}')
+        context.browser = browser
+    else:
+        context.browser = 'CHROME-LOCAL'
 
 
 def before_scenario(context, scenario):
-    context.app = get_app(context.config)
+    context.app = get_app(config=context.config,
+                          browser_name=context.browser)
+
+
+def after_scenario(context, scenario):
+    context.app.shutdown()
 
 
 def after_all(context):
-    context.app.shutdown()
+    if getattr(context, "app", None):
+        context.app.shutdown()

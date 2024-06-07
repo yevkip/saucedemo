@@ -33,16 +33,6 @@ Feature: Products
 #    Then Products in cart are displayed with "Remove" btn
 #
 #
-#  Scenario Outline: Verify btn state change from <initial_state> to <final_state>
-#    Given Logged in User is on Products page
-#    Given <initial_state> btn is displayed for product
-#    When User clicks on <initial_state> btn
-#    Then Btn changes state to <final_state>
-#    Examples:
-#      | initial_state | final_state   |
-#      | "Add to cart" | "Remove"      |
-#      | "Remove"      | "Add to cart" |
-#
 #  Scenario Outline: Verify product autonomy when <initial_state> btn is clicked
 #    Given Logged in User is on Products page
 #    When User clicks on <initial_state> btn
@@ -96,3 +86,24 @@ Feature: Products
       | initial_qty | qty_to_remove | final_qty |
       | 1           | 1             | 0         |
       | 6           | 2             | 4         |
+
+  Scenario Outline: Verify btn state change from "<initial_state>" to "<final_state>"
+    Given Logged in User is on Products page
+    Given User picks a product
+    Given Btn state is <initial_state>
+    When User clicks on <initial_state> btn on Products page
+    Then Btn state is <final_state>
+    Examples:
+      | initial_state | final_state |
+      | Add to cart   | Remove      |
+#
+  Scenario Outline: Verify btn state change from "<initial_state>" to "<final_state>"
+    Given Logged in User is on Products page
+    Given User picks a product
+    Given User clicks on <initial_state> btn on Products page
+    Given Btn state is <initial_state>
+    When User clicks on <initial_state> btn on Products page
+    Then Btn state is <final_state>
+    Examples:
+      | initial_state | final_state |
+      | Remove        | Add to cart |

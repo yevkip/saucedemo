@@ -1,13 +1,12 @@
-import os
 from .web_app import WebApp
 from .driver import get_driver
 
 
-def get_app(config):
-    driver = get_driver(config)
-    # environment_name = os.environ.get('TEST_ENV', 'CZ')
-    environment_config = config['environments']
-    return WebApp(driver, environment_config)
+def get_app(config, browser_name):
+    driver = get_driver(config, browser_name)
+    environment_config = config
+    return WebApp(driver=driver,
+                  environment_config=environment_config)
 
 
 __all__ = ['get_app', 'WebApp']

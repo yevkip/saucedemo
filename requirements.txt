@@ -1,0 +1,7 @@
+# Core dependencies
+selenium
+behave
+pyyaml
+
+# Dependencies for Allure reporting
+allure-behave

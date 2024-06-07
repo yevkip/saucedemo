@@ -55,7 +55,8 @@ class CheckoutOverviewPage(BasePage):
         assert expected_items_total_price == self.summary_items_price
         expected_tax = round(expected_items_total_price * 0.08, 2)
         assert expected_tax == self.summary_tax_price
-        assert expected_items_total_price + expected_tax == self.summary_total_price
+        assert expected_items_total_price + expected_tax == self.summary_total_price, print(
+            f'Expected {expected_items_total_price + expected_tax}, Actual {self.summary_total_price}')
 
     def finish_checkout(self):
         self.d.find_element(By.ID, self.finish_checkout_btn_selector).click()

@@ -5,5 +5,23 @@ browsers:
   CHROME-LOCAL:
     type: local
     browser: Chrome
+  FIREFOX-REMOTE:
+    type: remote
+    browser: Firefox
+    grid_url: http://192.168.0.4:4444
+  CHROME-REMOTE:
+    type: remote
+    browser: Chrome
+    grid_url: http://192.168.0.4:4444
 environments:
     url: https://www.saucedemo.com/
+credentials:
+  username:
+    user1: standard_user
+    user2: visual_user
+    user3: problem_user
+    user4: performance_glitch_user
+    user5: error_user
+    user6: locked_out_user
+  password: secret_sauce
+

@@ -1,10 +1,10 @@
 Feature: Login
 
   Scenario Outline: Login as "<user>" user with valid creds
-    Given I load the website
-    When I enter <user> username to username field
-    When I enter secret_sauce password to password field
-    When I click on "Login" btn
+    Given Website is loaded
+    When User enter <user> username to username field
+    When User enter secret_sauce password to password field
+    When User click on "Login" btn
     Then User is on Products page
     Examples:
       | user          |
@@ -15,11 +15,11 @@ Feature: Login
 
 
   Scenario Outline: Login attempt <reason>
-    Given I load the website
-    When I enter <user> username to username field
-    When I enter <password> password to password field
-    When I click on "Login" btn
-    Then I see an error <error>
+    Given Website is loaded
+    When User enter <user> username to username field
+    When User enter <password> password to password field
+    When User click on "Login" btn
+    Then User see an error <error>
     Examples:
       | user             | password     | reason                      | error                                                                     |
       | standard_user    | [blank]      | with missed password        | Epic sadface: Password is required                                        |
