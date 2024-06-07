@@ -2,10 +2,6 @@ from behave import *
 
 
 @given(u'User complete checkout info and proceed to Checkout Overview page')
-def step_impl(context):
-    context.app.checkout_page.complete_checkout_info_and_submit()
-
-
 @when(u'User complete checkout info and proceed to Checkout Overview page')
 def step_impl(context):
     context.app.checkout_page.complete_checkout_info_and_submit()
